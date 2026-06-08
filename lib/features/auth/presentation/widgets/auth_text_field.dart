@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AuthTextField extends StatefulWidget {
   final String label;
@@ -6,6 +7,10 @@ class AuthTextField extends StatefulWidget {
   final bool obscureText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+
   const AuthTextField({
     super.key,
     required this.label,
@@ -13,6 +18,8 @@ class AuthTextField extends StatefulWidget {
     required this.controller,
     this.obscureText = false,
     this.validator,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -45,6 +52,9 @@ class _AuthTextFieldState extends State<AuthTextField> {
           obscureText: _obscureText,
           validator: widget.validator,
           autovalidateMode: AutovalidateMode.onUserInteraction,
+
+          keyboardType: widget.keyboardType,
+          inputFormatters: widget.inputFormatters,
 
           decoration: InputDecoration(
             hintText: widget.hint,

@@ -4,6 +4,7 @@ import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_na
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_header.dart';
 import 'package:vyaparnet/features/data/dummy_businesses.dart';
 import 'package:vyaparnet/features/auth/presentation/models/dashboard_header_model.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/room_detail_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -55,8 +56,18 @@ class DashboardPage extends StatelessWidget {
                       Expanded(
                         child: ListView.builder(
                           itemCount: businesses.length,
-                          itemBuilder: (_, index) {
-                            return BusinessCard(business: businesses[index]);
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const RoomDetailPage(),
+                                  ),
+                                );
+                              },
+                              child: BusinessCard(business: businesses[index]),
+                            );
                           },
                         ),
                       ),

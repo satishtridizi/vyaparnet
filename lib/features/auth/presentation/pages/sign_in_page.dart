@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/auth_card.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/city_background.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -55,11 +56,21 @@ class SignInPage extends StatelessWidget {
 
                       AuthCard(
                         mode: AuthMode.signIn,
+
                         onAuthSwitch: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => const SignupPage(),
+                            ),
+                          );
+                        },
+
+                        onSignIn: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DashboardPage(),
                             ),
                           );
                         },

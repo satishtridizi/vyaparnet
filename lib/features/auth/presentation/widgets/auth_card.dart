@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/ResetPasswordScreen.dart';
 import '../../../../core/theme/app_colors.dart';
 import 'auth_text_field.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
+import 'package:flutter/services.dart';
 
 enum AuthMode { signIn, signUp }
 
 class AuthCard extends StatefulWidget {
   final AuthMode mode;
   final VoidCallback onAuthSwitch;
+  final VoidCallback? onSignIn;
 
-  const AuthCard({super.key, required this.mode, required this.onAuthSwitch});
+  const AuthCard({
+    super.key,
+    required this.mode,
+    required this.onAuthSwitch,
+    this.onSignIn,
+  });
 
   @override
   State<AuthCard> createState() => _AuthCardState();
@@ -64,7 +73,7 @@ class _AuthCardState extends State<AuthCard> {
 
       debugPrint('Register');
     } else {
-      debugPrint('Login');
+      widget.onSignIn?.call();
     }
   }
 
@@ -99,13 +108,23 @@ class _AuthCardState extends State<AuthCard> {
               label: 'Phone number',
               hint: 'Your phone number',
               controller: phoneController,
+
+              keyboardType: TextInputType.number,
+
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(10),
+              ],
+
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Phone number is required';
                 }
-                if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                  return 'Enter valid 10 digit phone number';
+
+                if (value.length != 10) {
+                  return 'Phone number must be exactly 10 digits';
                 }
+
                 return null;
               },
             ),
@@ -153,13 +172,36 @@ class _AuthCardState extends State<AuthCard> {
             ],
 
             if (!isSignUp) ...[
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
 
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot your password?'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ResetPasswordScreen(
+                          onSendCode: (phone) async {
+                            print(phone);
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'Forgot your password',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ),
             ],

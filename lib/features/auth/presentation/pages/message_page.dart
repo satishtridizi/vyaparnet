@@ -1,8 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
 
-class MessagePage extends StatelessWidget {
+class MessagePage extends StatefulWidget {
   const MessagePage({super.key});
+
+  @override
+  State<MessagePage> createState() => _MessagePageState();
+}
+
+class _MessagePageState extends State<MessagePage> {
+  int selectedTab = 0;
+  final List<String> chats = [];
+
+  final List<String> notifications = [];
+
+  Widget buildEmptyState() {
+    return const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.forum_outlined, size: 100, color: Color(0xff4D5BCB)),
+        SizedBox(height: 20),
+        Text(
+          "You haven't got any message",
+          style: TextStyle(color: Colors.grey, fontSize: 16),
+        ),
+      ],
+    );
+  }
+
+  Widget buildChatList() {
+    if (chats.isEmpty) {
+      return buildEmptyState();
+    }
+
+    return ListView.builder(
+      itemCount: chats.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: const CircleAvatar(),
+          title: Text(chats[index]),
+          subtitle: const Text("3 hours ago"),
+        );
+      },
+    );
+  }
+
+  Widget buildNotificationList() {
+    if (notifications.isEmpty) {
+      return buildEmptyState();
+    }
+
+    return ListView.builder(
+      itemCount: notifications.length,
+      itemBuilder: (context, index) {
+        return ListTile(title: Text(notifications[index]));
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,31 +100,56 @@ class MessagePage extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: 45,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff4D5BCB),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Text(
-                        'Chat',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedTab = 0;
+                        });
+                      },
+                      child: Container(
+                        height: 45,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: selectedTab == 0
+                              ? const Color(0xff4D5BCB)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Text(
+                          'Chat',
+                          style: TextStyle(
+                            color: selectedTab == 0
+                                ? Colors.white
+                                : Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
                   ),
 
-                  const Expanded(
-                    child: SizedBox(
-                      height: 45,
-                      child: Center(
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedTab = 1;
+                        });
+                      },
+                      child: Container(
+                        height: 45,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: selectedTab == 1
+                              ? const Color(0xff4D5BCB)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                         child: Text(
                           'Notifications',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: selectedTab == 1
+                                ? Colors.white
+                                : Colors.grey,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -81,22 +160,13 @@ class MessagePage extends StatelessWidget {
               ),
             ),
 
-            const Spacer(),
-
-            const Icon(
-              Icons.forum_outlined,
-              size: 100,
-              color: Color(0xff4D5BCB),
-            ),
-
             const SizedBox(height: 20),
 
-            const Text(
-              "You haven't got any message",
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+            Expanded(
+              child: selectedTab == 0
+                  ? buildChatList()
+                  : buildNotificationList(),
             ),
-
-            const Spacer(),
           ],
         ),
       ),

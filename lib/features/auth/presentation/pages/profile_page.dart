@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/models/terms_model.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/settings_page.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/support_page.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/terms_conditions_page.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
 import '../models/profile_model.dart';
 import '../widgets/profile_header.dart';
@@ -79,7 +81,31 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PrivacyPolicyPage(),
+                          builder: (_) => TermsConditionsPage(
+                            sections: const [
+                              TermsSection(
+                                title: 'Terms of Use',
+                                description:
+                                    'Welcome to VyaparNet! We are excited to have you as part of our community. These Terms of Use explain how our platform works and what you can expect when using it.',
+                              ),
+
+                              TermsSection(
+                                title: 'Privacy Policy',
+                                description:
+                                    'This Privacy Policy explains how we collect, use, store and process your personal information.',
+                              ),
+
+                              TermsSection(
+                                title: 'Community Standards',
+                                description:
+                                    'To ensure a safe and respectful community for all users, we have established community standards.',
+                              ),
+                            ],
+
+                            onAccept: () {
+                              Navigator.pop(context);
+                            },
+                          ),
                         ),
                       );
                     },

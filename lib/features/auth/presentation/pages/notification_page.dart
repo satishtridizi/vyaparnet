@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/room_detail_page.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/notification_card.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/booking_detail_page.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -58,32 +60,80 @@ class NotificationPage extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: const [
-                Text('Yesterday', textAlign: TextAlign.center),
+              children: [
+                const Text('Yesterday', textAlign: TextAlign.center),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                NotificationCard(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BookingDetailPage(),
+                      ),
+                    );
+                  },
+                  child: const NotificationCard(),
+                ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                NotificationCard(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BookingDetailPage(),
+                      ),
+                    );
+                  },
+                  child: const NotificationCard(),
+                ),
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
-                Text('Wednesday', textAlign: TextAlign.center),
+                const Text('Wednesday', textAlign: TextAlign.center),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                NotificationCard(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BookingDetailPage(),
+                      ),
+                    );
+                  },
+                  child: const NotificationCard(),
+                ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                NotificationCard(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BookingDetailPage(),
+                      ),
+                    );
+                  },
+                  child: const NotificationCard(),
+                ),
 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                NotificationCard(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const RoomDetailPage()),
+                    );
+                  },
+                  child: const NotificationCard(),
+                ),
               ],
             ),
           ),

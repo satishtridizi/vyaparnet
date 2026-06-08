@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/sign_in_page.dart';
 
 void main() {
   runApp(const MyApp());

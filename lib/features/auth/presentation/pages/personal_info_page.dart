@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vyaparnet/features/auth/presentation/models/profile_model.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class PersonalInfoPage extends StatefulWidget {
   final ProfileModel profile;
@@ -17,6 +19,21 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
   late TextEditingController emailController;
 
   String? imageUrl;
+  File? selectedImage;
+
+  final ImagePicker _picker = ImagePicker();
+  Future<void> _pickImage() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        selectedImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -94,24 +111,35 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                       children: [
                         CircleAvatar(
                           radius: 45,
-                          backgroundImage: NetworkImage(imageUrl!),
+                          backgroundImage: selectedImage != null
+                              ? FileImage(selectedImage!)
+                              : (imageUrl != null
+                                        ? NetworkImage(imageUrl!)
+                                        : null)
+                                    as ImageProvider?,
+                          child: imageUrl == null && selectedImage == null
+                              ? const Icon(Icons.person, size: 40)
+                              : null,
                         ),
 
                         const SizedBox(width: 20),
 
                         Expanded(
-                          child: Container(
-                            height: 50,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffEAF0FF),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Text(
-                              'Change your photo',
-                              style: TextStyle(
-                                color: Color(0xff4D5BCB),
-                                fontWeight: FontWeight.w600,
+                          child: GestureDetector(
+                            onTap: _pickImage,
+                            child: Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffEAF0FF),
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: const Text(
+                                'Change your photo',
+                                style: TextStyle(
+                                  color: Color(0xff4D5BCB),
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
