@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BookingDetailPage extends StatelessWidget {
-  const BookingDetailPage({super.key});
+  BookingDetailPage({super.key});
+  final List<String> facilities = [
+    'Elevator',
+    'Hot Water',
+    'Cooking Place',
+    'Parking',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class BookingDetailPage extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          'assets/images/room1.jpg',
+                          'assets/images/room1.webp',
                           height: 220,
                           width: 320,
                           fit: BoxFit.cover,
@@ -102,12 +108,18 @@ class BookingDetailPage extends StatelessWidget {
                             Wrap(
                               spacing: 10,
                               runSpacing: 10,
-                              children: const [
-                                Chip(label: Text('Elevator')),
-                                Chip(label: Text('Hot Water')),
-                                Chip(label: Text('Cooking Place')),
-                                Chip(label: Text('Parking')),
-                              ],
+                              children: facilities.map((facility) {
+                                return ActionChip(
+                                  label: Text(facility),
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('$facility clicked'),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }).toList(),
                             ),
 
                             const SizedBox(height: 30),
@@ -117,8 +129,17 @@ class BookingDetailPage extends StatelessWidget {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xff3F4CCB),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(14),
+                                      ),
+                                    ),
 
-                                    child: const Text('Chat with host'),
+                                    child: const Text(
+                                      'Chat with host',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
 

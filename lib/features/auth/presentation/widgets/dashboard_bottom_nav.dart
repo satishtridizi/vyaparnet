@@ -3,6 +3,7 @@ import 'package:vyaparnet/features/auth/presentation/models/profile_model.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/message_page.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/profile_page.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/favorites_page.dart';
 
 class DashboardBottomNav extends StatelessWidget {
   final int selectedIndex;
@@ -96,6 +97,12 @@ class DashboardBottomNav extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (_) => const MessagePage()),
+          );
+        }
+        if (index == 3) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const FavoritesPage()),
           );
         }
       },

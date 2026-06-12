@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
+import 'package:vyaparnet/features/auth/presentation/models/chat_model.dart';
+import 'package:vyaparnet/features/data/messages.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/Create chat_details_page.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({super.key});
@@ -10,21 +13,22 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage> {
   int selectedTab = 0;
-  final List<String> chats = [];
 
   final List<String> notifications = [];
 
   Widget buildEmptyState() {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.forum_outlined, size: 100, color: Color(0xff4D5BCB)),
-        SizedBox(height: 20),
-        Text(
-          "You haven't got any message",
-          style: TextStyle(color: Colors.grey, fontSize: 16),
-        ),
-      ],
+    return const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.forum_outlined, size: 100, color: Color(0xff4D5BCB)),
+          SizedBox(height: 20),
+          Text(
+            "You haven't got any message",
+            style: TextStyle(color: Colors.grey, fontSize: 16),
+          ),
+        ],
+      ),
     );
   }
 
@@ -34,12 +38,52 @@ class _MessagePageState extends State<MessagePage> {
     }
 
     return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       itemCount: chats.length,
       itemBuilder: (context, index) {
+        final chat = chats[index];
+
         return ListTile(
-          leading: const CircleAvatar(),
-          title: Text(chats[index]),
-          subtitle: const Text("3 hours ago"),
+          contentPadding: const EdgeInsets.symmetric(vertical: 8),
+          leading: CircleAvatar(
+            radius: 28,
+            backgroundImage: AssetImage(chat.image),
+          ),
+          title: Text(
+            chat.name,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+          subtitle: Text(
+            chat.lastMessage,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                chat.time,
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+
+              if (chat.unread)
+                Container(
+                  margin: const EdgeInsets.only(top: 6),
+                  width: 10,
+                  height: 10,
+                  decoration: const BoxDecoration(
+                    color: Color(0xff4D5BCB),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+            ],
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ChatDetailsPage(chat: chat)),
+            );
+          },
         );
       },
     );
@@ -145,7 +189,7 @@ class _MessagePageState extends State<MessagePage> {
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: Text(
-                          'Notifications',
+                          'Service',
                           style: TextStyle(
                             color: selectedTab == 1
                                 ? Colors.white

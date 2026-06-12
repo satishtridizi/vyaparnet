@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/onboarding_screen.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/signup_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Auth UI',
-      home: const DashboardPage(),
+      routes: {
+        '/': (context) => const OnboardingScreen(),
+        '/signup': (context) => const SignupPage(),
+        '/signin': (context) => const SignInPage(),
+      },
     );
   }
 }

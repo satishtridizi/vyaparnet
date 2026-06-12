@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../models/notification_model.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({super.key});
+  final NotificationModel notification;
+
+  const NotificationCard({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +18,8 @@ class NotificationCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              'https://picsum.photos/100',
+            child: Image.asset(
+              notification.imageUrl,
               width: 65,
               height: 65,
               fit: BoxFit.cover,
@@ -25,21 +28,28 @@ class NotificationCard extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Flat 50% Off on Sofas',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  notification.title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
 
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
 
                 Text(
-                  'Our recliner sofas let you unwind effortlessly.',
+                  notification.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
+                ),
+
+                const SizedBox(height: 4),
+
+                Text(
+                  notification.date,
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
             ),

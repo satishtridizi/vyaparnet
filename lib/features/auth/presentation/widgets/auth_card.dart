@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/BusinessProfileScreen.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/ResetPasswordScreen.dart';
 import '../../../../core/theme/app_colors.dart';
 import 'auth_text_field.dart';
@@ -70,8 +71,10 @@ class _AuthCardState extends State<AuthCard> {
         ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
         return;
       }
-
-      debugPrint('Register');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const BusinessProfileScreen()),
+      );
     } else {
       widget.onSignIn?.call();
     }

@@ -3,6 +3,7 @@ import 'package:vyaparnet/features/auth/presentation/pages/room_detail_page.dart
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/notification_card.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/booking_detail_page.dart';
+import 'package:vyaparnet/features/data/notifications.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -69,12 +70,10 @@ class NotificationPage extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const BookingDetailPage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => BookingDetailPage()),
                     );
                   },
-                  child: const NotificationCard(),
+                  child: NotificationCard(notification: notifications[0]),
                 ),
 
                 const SizedBox(height: 16),
@@ -83,56 +82,10 @@ class NotificationPage extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const BookingDetailPage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => BookingDetailPage()),
                     );
                   },
-                  child: const NotificationCard(),
-                ),
-
-                const SizedBox(height: 30),
-
-                const Text('Wednesday', textAlign: TextAlign.center),
-
-                const SizedBox(height: 16),
-
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BookingDetailPage(),
-                      ),
-                    );
-                  },
-                  child: const NotificationCard(),
-                ),
-
-                const SizedBox(height: 16),
-
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const BookingDetailPage(),
-                      ),
-                    );
-                  },
-                  child: const NotificationCard(),
-                ),
-
-                const SizedBox(height: 16),
-
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const RoomDetailPage()),
-                    );
-                  },
-                  child: const NotificationCard(),
+                  child: NotificationCard(notification: notifications[1]),
                 ),
               ],
             ),
