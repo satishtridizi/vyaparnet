@@ -8,7 +8,7 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1E1D57),
+      backgroundColor: const Color.fromARGB(255, 19, 39, 66),
       body: SafeArea(
         child: Stack(
           children: [
@@ -20,17 +20,6 @@ class SignupPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.asset("assets/logo.png", height: 80),
-
-                    const SizedBox(height: 12),
-
-                    const Text(
-                      "VyaparNet",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
 
                     const SizedBox(height: 32),
 

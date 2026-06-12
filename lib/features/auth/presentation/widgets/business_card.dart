@@ -9,25 +9,25 @@ class BusinessCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: const Color(0xffF5F6FC),
+        borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              'https://picsum.photos/200',
-              width: 80,
-              height: 80,
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              business.image,
+              width: 90,
+              height: 90,
               fit: BoxFit.cover,
             ),
           ),
 
-          const SizedBox(width: 12),
+          const SizedBox(width: 15),
 
           Expanded(
             child: Column(
@@ -35,11 +35,9 @@ class BusinessCard extends StatelessWidget {
               children: [
                 Text(
                   business.name,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
                   ),
                 ),
 
@@ -47,27 +45,40 @@ class BusinessCard extends StatelessWidget {
 
                 Text(
                   business.category,
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(fontSize: 18, color: Colors.black87),
                 ),
 
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
 
                 Row(
                   children: [
-                    const Icon(Icons.phone, size: 16),
+                    const Icon(Icons.call_outlined, size: 20),
                     const SizedBox(width: 4),
+
                     InkWell(
                       onTap: () {
-                        debugPrint(business.call);
+                        debugPrint("Call clicked");
                       },
-                      child: const Text('Call'),
+                      child: const Text(
+                        "Call",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                     ),
 
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 20),
 
-                    const Icon(Icons.message, size: 16),
+                    const Icon(Icons.message_outlined, size: 20),
                     const SizedBox(width: 4),
-                    const Text('Message'),
+
+                    InkWell(
+                      onTap: () {
+                        debugPrint("Message clicked");
+                      },
+                      child: const Text(
+                        "Message",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -77,18 +88,30 @@ class BusinessCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Row(
-                children: [
-                  const Icon(Icons.star, color: Colors.orange, size: 16),
-                  Text(business.rating.toString()),
-                ],
+              Text(
+                "${business.distance} km",
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 30),
 
-              Text(
-                '${business.distance} km',
-                style: const TextStyle(fontWeight: FontWeight.w600),
+              Row(
+                children: [
+                  const Icon(Icons.star, color: Colors.orange, size: 20),
+
+                  const SizedBox(width: 4),
+
+                  Text(
+                    business.rating.toString(),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

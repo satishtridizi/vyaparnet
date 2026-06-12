@@ -19,13 +19,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, String>> pages = [
     {
-      "image": "assets/images/onboarding1.jpg",
+      "image": "assets/images/onboarding1.webp",
       "title": "Grow your Network, Business & Revenue",
       "desc":
           "We provide you with a variant of businesses and referrals to each other just like yours.",
     },
     {
-      "image": "assets/images/onboarding2.jpg",
+      "image": "assets/images/onboarding2.webp",
       "title": "Lead generation and scale it effectively",
       "desc":
           "As your business network expands, stronger lead generation opportunities help create meaningful connections.",
@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             child: Image.asset(
                               pages[index]["image"]!,
                               width: double.infinity,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),

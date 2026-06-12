@@ -20,21 +20,7 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
 
   String? imageUrl;
   File? selectedImage;
-
   final ImagePicker _picker = ImagePicker();
-  Future<void> _pickImage() async {
-    final XFile? pickedFile = await _picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 80,
-    );
-
-    if (pickedFile != null) {
-      setState(() {
-        selectedImage = File(pickedFile.path);
-      });
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -54,6 +40,19 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
     phoneController.dispose();
     emailController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickImage() async {
+    final XFile? pickedFile = await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+
+    if (pickedFile != null) {
+      setState(() {
+        selectedImage = File(pickedFile.path);
+      });
+    }
   }
 
   @override
@@ -109,21 +108,27 @@ class _PersonalInfoPageState extends State<PersonalInfoPage> {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(
-                          radius: 45,
-                          backgroundImage: selectedImage != null
-                              ? FileImage(selectedImage!)
-                              : (imageUrl != null
-                                        ? NetworkImage(imageUrl!)
-                                        : null)
-                                    as ImageProvider?,
-                          child: imageUrl == null && selectedImage == null
-                              ? const Icon(Icons.person, size: 40)
-                              : null,
+                        Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xffE5E5E5),
+                              width: 2,
+                            ),
+                          ),
+                          child: CircleAvatar(
+                            radius: 40,
+                            backgroundImage: selectedImage != null
+                                ? FileImage(selectedImage!)
+                                : const AssetImage(
+                                        'assets/profile/profile.webp',
+                                      )
+                                      as ImageProvider,
+                          ),
                         ),
 
                         const SizedBox(width: 20),
-
                         Expanded(
                           child: GestureDetector(
                             onTap: _pickImage,

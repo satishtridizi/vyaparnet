@@ -10,10 +10,10 @@ class TermsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,20 +21,21 @@ class TermsCard extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6F748C),
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff7B809B),
             ),
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
 
           Text(
             description,
             style: const TextStyle(
               fontSize: 14,
               color: Color(0xff9EA3B6),
-              height: 1.4,
+              height: 1.6,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],

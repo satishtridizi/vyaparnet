@@ -6,6 +6,25 @@ class NotificationCard extends StatelessWidget {
 
   const NotificationCard({super.key, required this.notification});
 
+  Color getTagColor(String tag) {
+    switch (tag) {
+      case 'Hot Deals!':
+        return Colors.red;
+
+      case 'Promotion':
+        return Colors.blue;
+
+      case 'Discounts':
+        return Colors.green;
+
+      case 'Offers':
+        return const Color(0xff2057A7);
+
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,9 +51,33 @@ class NotificationCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: getTagColor(notification.tag),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    notification.tag,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
                 Text(
                   notification.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
 
                 const SizedBox(height: 4),
@@ -43,9 +86,10 @@ class NotificationCard extends StatelessWidget {
                   notification.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Color(0xff6F748C)),
                 ),
 
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
 
                 Text(
                   notification.date,

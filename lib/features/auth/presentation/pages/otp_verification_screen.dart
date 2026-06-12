@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/BusinessProfileScreen.dart';
 import '../../../../core/theme/app_colors.dart';
 import 'dart:async';
 
@@ -216,7 +217,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                     .map((e) => e.text)
                                     .join();
 
-                                print("OTP: $otp");
+                                if (otp.length != 4) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Please enter OTP"),
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const BusinessProfileScreen(),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,
@@ -248,7 +264,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               child: Opacity(
                 opacity: 0.25,
                 child: Image.asset(
-                  'assets/images/city.png',
+                  'assets/images/city.jpg',
                   fit: BoxFit.cover,
                   height: 90,
                 ),

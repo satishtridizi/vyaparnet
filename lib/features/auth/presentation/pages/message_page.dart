@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vyaparnet/features/auth/presentation/models/ServiceNotification.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/NotificationDetailsPage%20.dart';
+import 'package:vyaparnet/features/auth/presentation/widgets/ServiceNotificationCard.dart';
 import 'package:vyaparnet/features/auth/presentation/widgets/dashboard_bottom_nav.dart';
 import 'package:vyaparnet/features/auth/presentation/models/chat_model.dart';
 import 'package:vyaparnet/features/data/messages.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/Create chat_details_page.dart';
+import 'package:vyaparnet/features/data/serviceNotifications.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({super.key});
@@ -13,8 +17,6 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage> {
   int selectedTab = 0;
-
-  final List<String> notifications = [];
 
   Widget buildEmptyState() {
     return const Center(
@@ -90,14 +92,27 @@ class _MessagePageState extends State<MessagePage> {
   }
 
   Widget buildNotificationList() {
-    if (notifications.isEmpty) {
+    if (serviceNotifications.isEmpty) {
       return buildEmptyState();
     }
 
     return ListView.builder(
-      itemCount: notifications.length,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      itemCount: serviceNotifications.length,
       itemBuilder: (context, index) {
-        return ListTile(title: Text(notifications[index]));
+        return ServiceNotificationCard(
+          notification: serviceNotifications[index],
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => NotificationDetailsPage(
+                  notification: serviceNotifications[index],
+                ),
+              ),
+            );
+          },
+        );
       },
     );
   }

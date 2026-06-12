@@ -5,6 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import 'auth_text_field.dart';
 import 'package:vyaparnet/features/auth/presentation/pages/dashboard_page.dart';
 import 'package:flutter/services.dart';
+import 'package:vyaparnet/features/auth/presentation/pages/otp_verification_screen.dart';
 
 enum AuthMode { signIn, signUp }
 
@@ -71,9 +72,9 @@ class _AuthCardState extends State<AuthCard> {
         ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
         return;
       }
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const BusinessProfileScreen()),
+        MaterialPageRoute(builder: (_) => const OtpVerificationScreen()),
       );
     } else {
       widget.onSignIn?.call();

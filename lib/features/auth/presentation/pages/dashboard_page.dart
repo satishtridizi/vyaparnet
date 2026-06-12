@@ -31,48 +31,109 @@ class DashboardPage extends StatelessWidget {
             DashboardHeader(data: headerData),
 
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xffF6F6F6),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(35)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Near to you",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Banner
+                    SizedBox(
+                      height: 180,
+                      width: double.infinity,
+                      child: PageView(
+                        children: [
+                          ClipRRect(
+                            child: Image.asset(
+                              "assets/images/banner1.jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Categories
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ),
 
-                      const SizedBox(height: 20),
+                    const SizedBox(height: 15),
 
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: businesses.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const RoomDetailPage(),
-                                  ),
-                                );
-                              },
-                              child: BusinessCard(business: businesses[index]),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: GridView.count(
+                        crossAxisCount: 5,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 15,
+                        childAspectRatio: 0.9,
+                        children: [
+                          categoryItem(
+                            "Restaurant",
+                            "assets/icons/restaurant.png",
+                          ),
+                          categoryItem("Retail", "assets/icons/retail.png"),
+                          categoryItem("Saloon", "assets/icons/saloon.png"),
+                          categoryItem("Events", "assets/icons/events.png"),
+                          categoryItem("Fitness", "assets/icons/fitness.png"),
+                          categoryItem(
+                            "Education",
+                            "assets/icons/education.png",
+                          ),
+                          categoryItem(
+                            "Real Estate",
+                            "assets/icons/estate.png",
+                          ),
+                          categoryItem("Automobile", "assets/icons/car.png"),
+                          categoryItem("Tours", "assets/icons/tours.png"),
+                          categoryItem("Show More", "assets/icons/more.png"),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        "Near to you",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    ListView.builder(
+                      itemCount: businesses.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const RoomDetailPage(),
+                              ),
                             );
                           },
-                        ),
-                      ),
-                    ],
-                  ),
+                          child: BusinessCard(business: businesses[index]),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -81,4 +142,31 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget categoryItem(String title, String image) {
+  return Column(
+    children: [
+      Container(
+        width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          color: const Color(0xffF2F3F7),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Image.asset(image),
+        ),
+      ),
+
+      const SizedBox(height: 6),
+
+      Text(
+        title,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 11),
+      ),
+    ],
+  );
 }

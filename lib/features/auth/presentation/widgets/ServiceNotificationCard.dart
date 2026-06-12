@@ -62,7 +62,7 @@ class ServiceNotificationCard extends StatelessWidget {
               ),
             ),
 
-            if (notification.isUnread)
+            if (notification.unread)
               Container(
                 width: 8,
                 height: 8,

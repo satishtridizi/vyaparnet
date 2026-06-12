@@ -54,8 +54,10 @@ class ProfileHeader extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: CircleAvatar(
-                  radius: 42,
-                  backgroundImage: NetworkImage(profile.imageUrl),
+                  radius: 45,
+                  backgroundImage: const AssetImage(
+                    'assets/profile/profile.png',
+                  ),
                 ),
               ),
 
@@ -68,7 +70,7 @@ class ProfileHeader extends StatelessWidget {
                     profile.name,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -87,7 +89,10 @@ class ProfileHeader extends StatelessWidget {
 
                       Text(
                         '${profile.points} points',
-                        style: const TextStyle(color: Colors.white70),
+                        style: const TextStyle(
+                          color: Color(0xffD0D0D0),
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),

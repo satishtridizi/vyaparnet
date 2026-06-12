@@ -48,7 +48,7 @@ class DashboardBottomNav extends StatelessWidget {
                       profile: ProfileModel(
                         name: 'John Doe',
                         points: 1200,
-                        imageUrl: 'https://i.pravatar.cc/150',
+                        imageUrl: 'assets/profile/profile.webp',
                         phone: '1234567890',
                         email: 'johndoe@example.com',
                       ),

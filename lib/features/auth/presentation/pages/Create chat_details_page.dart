@@ -61,21 +61,57 @@ class ChatDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 children: [
                   _receiverMessage("Hi there, will you come in time?"),
-
                   _senderMessage("Yes, I will"),
-
                   _receiverMessage(
                     "Thanks a lot. We also have different services like free wifi, sauna and spa",
                   ),
-
                   _senderMessage("Sound great. Where can I contact?"),
-
                   _receiverMessage("Please tell the receptionist"),
-
                   _senderMessage("Thank you"),
-
                   _receiverMessage(
                     "You're welcome and have a good day. See you soon!",
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF1F3FA),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const TextField(
+                        decoration: InputDecoration(
+                          hintText: "Type a message...",
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 10),
+
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff4D5BCB),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.send, color: Colors.white),
+                    ),
                   ),
                 ],
               ),
